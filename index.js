@@ -1,7 +1,7 @@
 //raw connection 
 var redshiftClient = require('./redshift.js');
- 
-function test(event) {
+  
+function pullFromS3PushtoRedshift(event) {
     console.log(event.Records[0].s3.object.key,'event is here !!!!');
 redshiftClient.connect(function(err){
   if(err) throw err;
@@ -28,7 +28,6 @@ redshiftClient.connect(function(err){
 exports.handler = (event, context, callback) => {
     console.log(event,"export event here !!!!!!!");
     // TODO implement
-    test(event);
-    console.log("test");
+    pullFromS3PushtoRedshift(event);
     callback(null, 'Hello from Lambda');
 };
